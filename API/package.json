@@ -1,0 +1,25 @@
+{
+  "name": "apirest-nodejs",
+  "version": "1.0.0",
+  "description": "Curso completo de nodeJS con express - Api rest",
+  "main": "server.js",
+  "scripts": {
+    "start":"nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Felix Hernandez Hernandez",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "connect-multiparty": "^2.2.0",
+    "express": "^4.16.4",
+    "jwt-simple": "^0.5.5",
+    "moment": "^2.22.2",
+    "mongoose": "^5.3.14",
+    "mongoose-pagination": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  }
+}
