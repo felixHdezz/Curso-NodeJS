@@ -1,0 +1,50 @@
+<div *ngIf="artist" class="artist-box">
+    <div class="artist-head-card">
+        <div class="artist-detail-image">
+            <img src="{{url + 'artist/image/' + artist.image}}" *ngIf="artist.image && artist.image != 'null'" />
+        </div>
+        <div class="data">
+            <h3>{{artist.name}}</h3>
+            <p class="description">{{artist.description}}</p>
+            <a [routerLink]="['/album/create', artist._id]" *ngIf="identity.role == 'ROLES_ADMIN'" href="#" class="btn btn-default">
+                Añadir album
+            </a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="gallery-album" *ngIf="albums">
+        <ul class="albums-list">
+            <li *ngFor="let album of albums" class="col-lg-4 album-item">
+                <div class="album-image">
+                    <img src="{{url + 'album/image/'+ album.image}}">
+                </div>
+                <div class="album-name">
+                    <p>
+                        <a [routerLink]="['/album/detail', album._id]">
+                            {{album.title}}
+                        </a>
+                    </p>
+                    <p>
+                        <a [routerLink]="['/artist/detail', album.artist._id]">
+                            {{album.artist.name}}
+                        </a>
+                    </p>
+                    <div class="buttons" *ngIf="identity.role == 'ROLES_ADMIN'">
+                        <li>
+                            <a [routerLink]="['/album/edit', album._id]" class="btn btn-warning">Editar</a>
+                            <a (click)="onDeleteConfirm(album._id)" class="btn btn-danger">Borrar</a>
+                        </li>
+                    </div>
+                    <div class="seguro" *ngIf="confirmado == album._id">
+                        <a (click)="onDeleteAlbum(album._id)" class="btn btn-danger">
+                            Eliminar
+                        </a>
+                        <a (click)="onCancelAlbum()" class="btn btn-primary">
+                            Cancelar
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

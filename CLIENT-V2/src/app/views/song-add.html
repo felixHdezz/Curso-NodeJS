@@ -1,0 +1,45 @@
+<div class="" *ngIf="identity && identity.role == 'ROLES_ADMIN'">
+    <h4>{{_title}}</h4>
+    <div class="alert alert-success alert-dismissable" *ngIf="alertMessage">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{alertMessage}}
+    </div>
+    <form #formSong="ngForm" (ngSubmit)="onSubmit()" class="col-md-6">
+        <p>
+            <label>Numero:</label>
+            <input type="text" #number="ngModel" name="number" [(ngModel)]="song.number" class="form-control" required>
+            <span *ngIf="!number.valid && number.touched">
+                El numeor de la canción es obligatorio
+            </span>
+        </p>
+        <p>
+            <label>Titulo:</label>
+            <input type="text" #name="ngModel" name="name" [(ngModel)]="song.name" class="form-control" required>
+            <span *ngIf="!name.valid && name.touched">
+                El titulo es obligatorio
+            </span>
+        </p>
+        <p>
+            <label>Duración:</label>
+            <input type="text" #duration="ngModel" name="duration" [(ngModel)]="song.duration" class="form-control"
+                required>
+            <span *ngIf="!duration.valid && duration.touched">
+                La duración es obligatorio
+            </span>
+        </p>
+
+        <div class="" *ngIf="is_edit">
+            <div class="song-file-for-edit" *ngIf="song.file && song.file != 'null'">
+                <audio controls>
+                    <source src="{{ url + 'song/getFile/' + song.file }}" type="audio/mpeg" />
+                    El navegador web no soporta la reprodución de audio
+                </audio>
+            </div>
+            <p>
+                <label>Sube el fichero de audio</label>
+                <input type="file" placeholder="Subir fichero..." (change)="fileChangeEvent($event)">
+            </p>
+        </div>
+        <input type="submit" value="{{_title}}" [disabled]="!formSong.form.valid" class="btn btn-success" />
+    </form>
+</div>
